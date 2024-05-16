@@ -1,7 +1,6 @@
 package br.org.serratec.provaserratec.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

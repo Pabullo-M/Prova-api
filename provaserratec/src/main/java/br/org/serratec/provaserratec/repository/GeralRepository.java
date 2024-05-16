@@ -7,5 +7,5 @@ import br.org.serratec.provaserratec.model.Cliente;
 
 
 public interface GeralRepository extends JpaRepository<Cliente, Long> {
-	List<Cliente> findByNomeClienteContainingIgnoreCase(String cliente);
+	List<Cliente> findByNomeClienteContainingIgnoreCase(String nomeCliente);
 }

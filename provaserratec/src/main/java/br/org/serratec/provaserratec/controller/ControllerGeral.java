@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.catalogoDeMusicas.dto.MusicasDto;
 import br.org.serratec.provaserratec.dto.GeralDto;
 import br.org.serratec.provaserratec.service.GeralService;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -46,12 +45,12 @@ public class ControllerGeral {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public GeralDto inserir(@RequestBody GeralDto cliente) {
+	public GeralDto inserir(@Valid @RequestBody GeralDto cliente) {
 		return servico.salvarGeral(cliente);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<GeralDto> atualizar(@PathVariable Long id, @RequestBody GeralDto clienteAlterado) {
+	public ResponseEntity<GeralDto> atualizar(@Valid @PathVariable Long id, @RequestBody GeralDto clienteAlterado) {
 		Optional<GeralDto> cliente = servico.atualizarCliente(id, clienteAlterado);
 		
 		if (cliente.isEmpty()) {
@@ -69,11 +68,8 @@ public class ControllerGeral {
 	}
 	
 	@GetMapping("/buscarCliente")
-    public ResponseEntity<List<GeralDto>> buscarPorCliente(@RequestParam String cliente) {
-        List<GeralDto> clientes = servico.findByNomeClienteContainingIgnoreCase(cliente);
-        if (clientes.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(clientes);
+    public ResponseEntity<List<GeralDto>> buscarPorCliente(@RequestBody String cliente) {
+		return ResponseEntity.ok(servico.findByNomeClienteContainingIgnoreCase(cliente));
+    		
     }
 }

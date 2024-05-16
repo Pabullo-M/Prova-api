@@ -18,12 +18,8 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull(message= "nome do cleinte não pode estar em branco")
 	private String nomeCliente;
-	@NotBlank(message = "nome do Prato não pode estar em branco")
 	private String nomePrato;
-	@NotBlank
-	@Pattern(regexp = "\\d+", message = "Somente números são permitidos")
 	private String valorPrato;
 	private String pedido;
 	
